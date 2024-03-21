@@ -51,7 +51,7 @@ const Login = () => {
   return (
     <div className="flex flex-col lg:justify-center items-center h-screen">
       <Navbar />
-      <div className="flex flex-col justify-center items-center w-1/2 mb-[40px]  lg:mt-0 mt-12">
+      <div className="flex flex-col justify-center items-center w-1/2 mb-[40px]  lg:mt-0 md:mt-28 mt-[46px]">
         <img
           src={logo}
           className=" lg:w-[30%] w-[50%] mx-auto lg:block hidden"
