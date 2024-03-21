@@ -6,39 +6,42 @@ import Navbar from "./component/navbar";
 const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
-
-  const [focusedEmail, setFocusedEmail] = useState(false);
-  const [inputValueEmail, setInputValueEmail] = useState("");
-
   const [focusedPassword, setFocusedPassword] = useState(false);
-  const [inputValuePassword, setInputValuePassword] = useState("");
-
-  const handleFocusEmail = () => {
-    setFocusedEmail(true);
-  };
-
-  const handleBlurEmail = () => {
-    if (!inputValueEmail) {
-      setFocusedEmail(false);
-    }
-  };
-
-  const handleChangeEmail = (e) => {
-    setInputValueEmail(e.target.value);
-  };
+  const [focusedEmail, setFocusedEmail] = useState(false);
+  const [email, setEmail] = useState("");
 
   const handleFocusPassword = () => {
     setFocusedPassword(true);
   };
 
   const handleBlurPassword = () => {
-    if (!inputValuePassword) {
+    if (!password) {
       setFocusedPassword(false);
     }
   };
 
   const handleChangePassword = (e) => {
-    setInputValuePassword(e.target.value);
+    setPassword(e.target.value);
+    if (!focusedPassword && e.target.value) {
+      setFocusedPassword(true);
+    }
+  };
+
+  const handleFocusEmail = () => {
+    setFocusedEmail(true);
+  };
+
+  const handleBlurEmail = () => {
+    if (!email) {
+      setFocusedEmail(false);
+    }
+  };
+
+  const handleChangeEmail = (e) => {
+    setEmail(e.target.value);
+    if (!focusedEmail && e.target.value) {
+      setFocusedEmail(true);
+    }
   };
 
   const togglePasswordVisibility = () => {
@@ -54,31 +57,27 @@ const Login = () => {
           className=" lg:w-[30%] w-[50%] mx-auto lg:block hidden"
         />
       </div>
-      <p className=" text-center font-[900] lg:text-[48px] text-[32px] font-figtree">
+      <p className="text-center font-[900] lg:text-[48px] text-[32px] font-figtree">
         Welcome back!
       </p>
       <div className="relative">
         <div className="lg:w-[496px] w-[300px] mt-[28px] mb-[24px] relative">
-          <input
-            type="text"
-            className="w-full h-[48px] px-[16px] text-[13px] pt-1 border-[1px] border-solid border-[#D7D7D7] rounded-[4px] transition-all duration-300"
-            onFocus={handleFocusEmail}
-            onBlur={handleBlurEmail}
-            onChange={handleChangeEmail}
-          />
           <label
             className={`absolute left-[16px] transition-all duration-300 text-[#787878] ${
-              focusedEmail || inputValueEmail
-                ? "top-[20%] text-xs"
-                : "top-[50%] text-sm"
+              focusedEmail || email ? "top-[20%] text-xs" : "top-[50%] text-sm"
             } transform ${
-              focusedEmail || inputValueEmail
-                ? "-translate-y-2"
-                : "-translate-y-1/2"
+              focusedEmail || email ? "-translate-y-2" : "-translate-y-1/2"
             } text-black pointer-events-none`}
           >
             Email address*
           </label>
+          <input
+            type="text"
+            className="w-full h-[48px] px-[16px] text-[16px] pt-1 border-[1px] border-solid border-[#D7D7D7] rounded-[4px] transition-all duration-300 font-[400] font-lato"
+            onFocus={handleFocusEmail}
+            onBlur={handleBlurEmail}
+            onChange={handleChangeEmail}
+          />
         </div>
       </div>
       <div className="font-lato relative">
@@ -99,7 +98,7 @@ const Login = () => {
           <input
             type={showPassword ? "text" : "password"}
             placeholder=""
-            className="border border-solid border-[#D7D7D7] lg:w-[496px] w-[300px] h-[48px] rounded-[4px] px-[16px] pr-[48px] text-[13px]"
+            className="border border-solid border-[#D7D7D7] lg:w-[496px] w-[300px] h-[48px] rounded-[4px] px-[16px] pr-[48px] text-[16px] font-[400] font-lato"
             onFocus={handleFocusPassword}
             onBlur={handleBlurPassword}
             onChange={handleChangePassword}
@@ -126,9 +125,12 @@ const Login = () => {
       </div>
 
       <div>
-        <button className=" bg-[#E1083C] lg:w-[496px] w-[300px] h-[48px] rounded-[4px] mt-[48px] font-lato text-white text-[16px] hover:bg-[#e1083b9a] hover:shadow-md">
+        <button className="bg-[#E1083C] lg:w-[496px] w-[300px] h-[48px] rounded-[4px] mt-[48px] font-lato text-white text-[16px] hover:bg-[#e1083b9a] hover:shadow-md">
           Login
         </button>
+      </div>
+      <div className=" font-lato text-[16px] mt-[14px] py-[12px]">
+        Don't have an account? <span className=" font-bold">Sign Up</span>
       </div>
     </div>
   );
