@@ -7,21 +7,38 @@ const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
 
-  const [focused, setFocused] = useState(false);
-  const [inputValue, setInputValue] = useState("");
+  const [focusedEmail, setFocusedEmail] = useState(false);
+  const [inputValueEmail, setInputValueEmail] = useState("");
 
-  const handleFocus = () => {
-    setFocused(true);
+  const [focusedPassword, setFocusedPassword] = useState(false);
+  const [inputValuePassword, setInputValuePassword] = useState("");
+
+  const handleFocusEmail = () => {
+    setFocusedEmail(true);
   };
 
-  const handleBlur = () => {
-    if (!inputValue) {
-      setFocused(false);
+  const handleBlurEmail = () => {
+    if (!inputValueEmail) {
+      setFocusedEmail(false);
     }
   };
 
-  const handleChange = (e) => {
-    setInputValue(e.target.value);
+  const handleChangeEmail = (e) => {
+    setInputValueEmail(e.target.value);
+  };
+
+  const handleFocusPassword = () => {
+    setFocusedPassword(true);
+  };
+
+  const handleBlurPassword = () => {
+    if (!inputValuePassword) {
+      setFocusedPassword(false);
+    }
+  };
+
+  const handleChangePassword = (e) => {
+    setInputValuePassword(e.target.value);
   };
 
   const togglePasswordVisibility = () => {
@@ -45,15 +62,19 @@ const Login = () => {
           <input
             type="text"
             className="w-full h-[48px] px-[16px] text-[13px] pt-1 border-[1px] border-solid border-[#D7D7D7] rounded-[4px] transition-all duration-300"
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            onChange={handleChange}
+            onFocus={handleFocusEmail}
+            onBlur={handleBlurEmail}
+            onChange={handleChangeEmail}
           />
           <label
             className={`absolute left-[16px] transition-all duration-300 text-[#787878] ${
-              focused || inputValue ? "top-[20%] text-xs" : "top-[50%] text-sm"
+              focusedEmail || inputValueEmail
+                ? "top-[20%] text-xs"
+                : "top-[50%] text-sm"
             } transform ${
-              focused || inputValue ? "-translate-y-2" : "-translate-y-1/2"
+              focusedEmail || inputValueEmail
+                ? "-translate-y-2"
+                : "-translate-y-1/2"
             } text-black pointer-events-none`}
           >
             Email address*
@@ -63,21 +84,25 @@ const Login = () => {
       <div className="font-lato relative">
         <div>
           <label
-            className={`absolute left-[16px] top-${
-              focused ? "2" : "50%"
-            } transform -translate-y-1/2 text-black text-[10px] transition-all duration-200 ${
-              focused || password ? "text-[10px]" : "text-[13px]"
-            }`}
+            className={`absolute left-[16px] transition-all duration-300 text-[#787878] ${
+              focusedPassword || password
+                ? "top-[10%] text-xs"
+                : "top-[30%] text-sm"
+            } transform ${
+              focusedPassword || password
+                ? "-translate-y-2"
+                : "-translate-y-1/2"
+            } text-black pointer-events-none`}
           >
-            Password
+            Password*
           </label>
           <input
             type={showPassword ? "text" : "password"}
             placeholder=""
-            className="border border-solid border-[#D7D7D7] lg:w-[496px] w-[300px] h-[48px] rounded-[4px] px-[16px] pr-[48px]"
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            onChange={handleChange}
+            className="border border-solid border-[#D7D7D7] lg:w-[496px] w-[300px] h-[48px] rounded-[4px] px-[16px] pr-[48px] text-[13px]"
+            onFocus={handleFocusPassword}
+            onBlur={handleBlurPassword}
+            onChange={handleChangePassword}
           />
 
           <button
